@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# This script installs nginx web server on web-01 server
+
+# Update the package index
+sudo apt-get update
+
+# Install nginx with -y option to avoid prompts
+sudo apt-get install -y nginx
+
+# Create a file named hello_world in /var/www/html directory
+echo "Hello World!" | sudo tee /var/www/html/hello_world
+
+# Modify the default configuration file of nginx to serve the hello_world file
+sudo sed -i 's/index.nginx-debian.html/hello_world/' /etc/nginx/sites-enabled/default
+
+# Restart nginx using service command
+sudo service nginx restart
