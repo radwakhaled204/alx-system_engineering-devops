@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# 0-use_a_private_key
+
+# Use ssh with the -i flag to specify the private key file
+# Use the -o flag to disable password authentication
+# Use the user@host format to specify the user and host
+ssh -i ~/.ssh/school ubuntu@3.80.19.226
