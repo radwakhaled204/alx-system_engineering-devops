@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# 1-create_ssh_key_pair
+
+# Use ssh-keygen with the -t flag to specify the type of key
+# Use the -b flag to specify the number of bits in the key
+# Use the -f flag to specify the file name of the key
+# Use the -N flag to specify the passphrase of the key
+ssh-keygen -t rsa -b 4096 -f school -N betty
