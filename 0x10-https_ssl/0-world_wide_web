@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# A Bash script that will display information about subdomains
+
+# Define a function to get the record type and destination of a subdomain
+get_info() {
+  # Use dig command to query the DNS records of the subdomain
+  # Use awk to extract the relevant fields from the output
+  # Use cut to extract only the subdomain name
+  subdomain=$(echo "$1" | cut -d . -f 1)
+  record_type=$(dig "$1" | awk '/ANSWER SECTION:/{getline; print $4}')
+  destination=$(dig "$1" | awk '/ANSWER SECTION:/{getline; print $5}')
+
+  # Check if the variables are not empty
+  if [[ -n "$record_type" && -n "$destination" ]]; then
+    # Print the information in the required format
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+  else
+    # Print an error message if the subdomain does not exist or has no records
+    echo "No information found for $1"
+  fi
+}
+
+# Check if the domain argument is provided
+if [[ -z "$1" ]]; then
+  # Print an error message and exit if the domain argument is missing
+  echo "Usage: $0 domain [subdomain]"
+  exit 1
+fi
+
+# Check if the subdomain argument is provided
+if [[ -n "$2" ]]; then
+  # Call the get_info function with the domain and subdomain arguments
+  get_info "$2.$1"
+else
+  # Call the get_info function with the domain and the default subdomains
+  get_info "www.$1"
+  get_info "lb-01.$1"
+  get_info "web-01.$1"
+  get_info "web-02.$1"
+fi
