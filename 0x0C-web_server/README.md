@@ -1,0 +1,1 @@
+This project is a collection of Bash scripts that automate the process of setting up a web server using Nginx on Ubuntu 14.04 LTS. The scripts perform tasks such as installing Nginx, configuring Nginx to serve static files, setting up a custom domain name, enabling SSL with Let’s Encrypt, and redirecting HTTP traffic to HTTPS
