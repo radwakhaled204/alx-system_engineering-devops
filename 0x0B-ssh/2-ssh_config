@@ -1,0 +1,12 @@
+# 2-ssh_config
+
+# Use the Host directive to specify a name for the server
+Host server
+  # Use the Hostname directive to specify the IP address of the server
+  Hostname 3.80.19.226
+  # Use the User directive to specify the username to connect with
+  User ubuntu
+  # Use the IdentityFile directive to specify the private key file to use
+  IdentityFile ~/.ssh/school
+  # Use the PasswordAuthentication directive to disable password authentication
+  PasswordAuthentication no
