@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# A script that configures Nginx server to have a custom 404 page
+
+# Update the package index
+sudo apt-get update
+
+# Install nginx with -y option to avoid prompts
+sudo apt-get install -y nginx
+
+# Create a file named not_found in /var/www/html directory
+sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/not_found
+
+# Modify the default configuration file of Nginx to use the not_found file as the error_page for 404 errors
+sudo sed -i '/listen 80 default_server;/a \\terror_page 404 /not_found;\n\tlocation = /not_found {\n\t\tdefault_type text/html;\n\t}' /etc/nginx/sites-enabled/default
+
+# Reload Nginx service to apply the changes
+sudo service nginx restart
