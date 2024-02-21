@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# This script install UFW and Block all incoming traffic, except the following TCP ports: 22 (SSH), 443 (HTTPS SSL), and 80 (HTTP)
+
+# Update the package index
+sudo apt-get update
+
+# Install ufw, a program for managing a netfilter firewall
+sudo apt-get install ufw
+
+# Enable IPv6 support for ufw by editing the configuration file
+sudo sed -i 's/IPV6=.*/IPV6=yes/' /etc/default/ufw
+
+# Disable ufw if it is already running
+ufw disable
+
+# Enable ufw with the default settings
+ufw enable
+
+# Set the default policy to deny incoming connections and allow outgoing connections
+ufw default deny incoming
+ufw default allow outgoing
+
+# Allow incoming connections on port 22 for SSH
+ufw allow 22/tcp
+
+# Allow incoming connections on port 443 for HTTPS
+ufw allow 443/tcp
+
+# Allow incoming connections on port 80 for HTTP
+ufw allow 80/tcp
